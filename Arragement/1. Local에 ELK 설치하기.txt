@@ -1,0 +1,117 @@
+	1. Local에 ELK 설치하기
+	
+		1) Linux 터미널 접속하여 elastic, kibana 다운로드 받을 위치 이동
+			> $ cd ~
+			> $ mkdir elk # elastic, kibana를 다운받을 디렉토리 생성
+			> $ cd elk
+			
+		2) Elasticsearch 다운로드
+			a. https://www.elastic.co/kr/downloads/elasticsearch 다운로드 페이지 이동
+				> 우클릭 [링크 주소 복사]
+			
+			b. wget을 이용한 다운로드
+				> $ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.3.1-linux-x86_64.tar.gz
+			
+			
+		3) Kibana 다운로드
+			a. https://www.elastic.co/kr/downloads/kibana 다운로드 페이지 이동
+				> 우클릭 [링크 주소 복사]
+				
+			b. wget을 이용하여 다운로드
+				> $ wget https://artifacts.elastic.co/downloads/kibana/kibana-8.3.1-linux-x86_64.tar.gz
+				
+		4) 다운로드 받은 elasticsearch, kibana 압축 해제
+			> $ tar -zxvf elasticsearch-8.3.1-linux-x86_64.tar.gz
+			> $ tar -zxvf kibana-8.3.1-linux-x86_64.tar.gz
+			
+		5) elasticsearch 실행
+			$ bin/elasticsearch
+
+			.....
+			━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+			✅ Elasticsearch security features have been automatically configured!
+			✅ Authentication is enabled and cluster connections are encrypted.
+
+			ℹ️  Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
+			  5S36hVMrRDpHhSWEzfQd
+
+			ℹ️  HTTP CA certificate SHA-256 fingerprint:
+			  2fa4b787832cc6631b50f595e5dbb840e9b0c31984d4a2545da361afb2722d82
+
+			ℹ️  Configure Kibana to use this cluster:
+			• Run Kibana and click the configuration link in the terminal when Kibana starts.
+			• Copy the following enrollment token and paste it into Kibana in your browser (valid for the next 30 minutes):
+			  eyJ2ZXIiOiI4LjMuMSIsImFkciI6WyIxNzIuMjMuNzIuODg6OTIwMCJdLCJmZ3IiOiIyZmE0Yjc4NzgzMmNjNjYzMWI1MGY1OTVlNWRiYjg0MGU5YjBjMzE5ODRkNGEyNTQ1ZGEzNjFhZmIyNzIyZDgyIiwia2V5IjoiQnJUUHdvRUJ4dGYzLVpZU1RoSXQ6WjlxOWlLbDBUTzZGcHBpNHpPOVg2QSJ9
+
+			ℹ️  Configure other nodes to join this cluster:
+			• On this node:
+			  ⁃ Create an enrollment token with `bin/elasticsearch-create-enrollment-token -s node`.
+			  ⁃ Uncomment the transport.host setting at the end of config/elasticsearch.yml.
+			  ⁃ Restart Elasticsearch.
+			• On other nodes:
+			  ⁃ Start Elasticsearch with `bin/elasticsearch --enrollment-token <token>`, using the enrollment token that you generated.
+			━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+			.....
+
+			위 내용 저장
+			
+		6) kibana 실행
+			$ bin/kibana
+
+			.....
+			i Kibana has not been configured.
+
+			Go to http://localhost:5601/?code=347142 to get started.
+		
+		7) 크롬 브라우저에서 http://localhost:5601 접속
+		8) 토큰 입력 화면 나오면 elasticsearch 실행 시 저장 한 토큰 입력 후 진행
+		9) Kibana verification code 입력 화면 나오면 kibana 실행 터미널에서 확인 후 입력 후 진행
+			a. 원하는 비번으로 변경 시
+				# 엘라스틱 설치 경로 이동
+				$ bin/elasticsearch-reset-password -i -u elastic
+				This tool will reset the password of the [elastic] user.
+				You will be prompted to enter the password.
+				Please confirm that you would like to continue [y/N]y
+
+
+				Enter password for [elastic]: 비번 입력
+				Re-enter password for [elastic]: 비번 입력
+				Password for the [elastic] user successfully reset.
+		
+		10) elasticsearch curl 접속 시도 시 인증서 문제 해결 방법
+			$ curl https://localhost:9200 -u elastic:비밀번호
+			curl: (60) SSL certificate problem: self signed certificate in certificate chain
+			More details here: https://curl.haxx.se/docs/sslcerts.html
+
+			curl failed to verify the legitimacy of the server and therefore could not
+			establish a secure connection to it. To learn more about this situation and
+			how to fix it, please visit the web page mentioned above.
+		
+			a. elasticsearch에 등록되어 있는 인증서는  신뢰할 수 없는 인증서로 신뢰할 수 있는 인증서로 등록해야한다
+				# 엘라스틱 설치 경로 이동
+				$ cd /config/certs
+				$ sudo mkdir /usr/share/ca-certificates/extra/ # ca-certificates에 extra 디렉토리 생성
+				$ sudo cp http_ca.crt /usr/share/ca-certificates/extra/
+				$ sudo dpkg-reconfigure ca-certificates # http_ca.crt 선택 후 등록
+
+				# 아래와 같이 나오면 성공
+				$ curl https://localhost:9200 -u elastic:ab1234
+				{
+				  "name" : "DESKTOP-76G50Q1",
+				  "cluster_name" : "elasticsearch",
+				  "cluster_uuid" : "6_ux4aoETAuTmUTpe_BffA",
+				  "version" : {
+					"number" : "8.3.1",
+					"build_type" : "tar",
+					"build_hash" : "b9a6b2867996ba92ceac66cb5bafc6db25e7910e",
+					"build_date" : "2022-06-29T18:39:55.731992798Z",
+					"build_snapshot" : false,
+					"lucene_version" : "9.2.0",
+					"minimum_wire_compatibility_version" : "7.17.0",
+					"minimum_index_compatibility_version" : "7.0.0"
+				  },
+				  "tagline" : "You Know, for Search"
+				}
+						
+		
+		
