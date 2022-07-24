@@ -1,0 +1,19 @@
+	2. ELK 정보
+	------------------------------------------------------------------------------------------------------------------------
+	-> Elasticsearch security features have been automatically configured!
+	-> Authentication is enabled and cluster connections are encrypted.
+
+	X Unable to auto-generate the password for the elastic built-in superuser.
+	->  HTTP CA certificate SHA-256 fingerprint:
+	  bce3eb5d6c5fb58942acb159ccc0c7895519056d1c16d39d787368b140f92890
+
+	X Unable to generate an enrollment token for Kibana instances, try invoking `bin/elasticsearch-create-enrollment-token -s kibana`.
+
+	->  Configure other nodes to join this cluster:
+	* On this node:
+	  - Create an enrollment token with `bin/elasticsearch-create-enrollment-token -s node`.
+	  - Uncomment the transport.host setting at the end of config/elasticsearch.yml.
+	  - Restart Elasticsearch.
+	* On other nodes:
+	  - Start Elasticsearch with `bin/elasticsearch --enrollment-token <token>`, using the enrollment token that you generated.
+	------------------------------------------------------------------------------------------------------------------------
