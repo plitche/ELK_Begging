@@ -1,0 +1,226 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 8564768768 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3530), pid=27772, tid=21424
+#
+# JRE version:  (18.0.1.1+2) (build )
+# Java VM: OpenJDK 64-Bit Server VM (18.0.1.1+2-6, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+UseG1GC -Djava.io.tmpdir=C:\Users\Yongsoo Kwon\AppData\Local\Temp\elasticsearch -XX:+HeapDumpOnOutOfMemoryError -XX:+ExitOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m -Xms8167m -Xmx8167m -XX:+PrintFlagsFinal 
+
+Host: AMD Ryzen 7 2700 Eight-Core Processor          , 16 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.1806)
+Time: Mon Jul 25 00:37:41 2022  Windows 10 , 64 bit Build 19041 (10.0.19041.1806) elapsed time: 2.078407 seconds (0d 0h 0m 2s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000218e55934b0):  JavaThread "Unknown thread" [_thread_in_vm, id=21424, stack(0x0000005dcaf00000,0x0000005dcb000000)]
+
+Stack: [0x0000005dcaf00000,0x0000005dcb000000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x69887a]
+V  [jvm.dll+0x7f38bd]
+V  [jvm.dll+0x7f51ce]
+V  [jvm.dll+0x7f5883]
+V  [jvm.dll+0x25ca3f]
+V  [jvm.dll+0x6957c9]
+V  [jvm.dll+0x68a2fa]
+V  [jvm.dll+0x321efb]
+V  [jvm.dll+0x3298d6]
+V  [jvm.dll+0x37e47e]
+V  [jvm.dll+0x37e6af]
+V  [jvm.dll+0x2f9c7a]
+V  [jvm.dll+0x2facdd]
+V  [jvm.dll+0x7c24f0]
+V  [jvm.dll+0x38b801]
+V  [jvm.dll+0x7a1203]
+V  [jvm.dll+0x40d6bf]
+V  [jvm.dll+0x40f091]
+C  [jli.dll+0x526b]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17034]
+C  [ntdll.dll+0x52651]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffa0ec4d550, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00000218e5646fe0 WorkerThread "GC Thread#0" [stack: 0x0000005dcb000000,0x0000005dcb100000] [id=24368]
+  0x00000218e5657e50 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000005dcb100000,0x0000005dcb200000] [id=18340]
+  0x00000218e565b000 WorkerThread "G1 Conc#0" [stack: 0x0000005dcb200000,0x0000005dcb300000] [id=31524]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa0e47a217]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000218e558f100] Heap_lock - owner thread: 0x00000218e55934b0
+
+Heap address: 0x0000000601800000, size: 8168 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 32 size 80 Howl #buckets 8 coarsen threshold 7372 Howl Bitmap #cards 1024 size 144 coarsen threshold 921 Card regions per heap region 1 cards per card region 8192
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000601800000, 0x0000000800000000)
+  region size 4096K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa0e860cb9]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (1 events):
+Event: 0.033 Loaded shared library C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\java.dll
+
+
+Dynamic libraries:
+0x00007ff76c530000 - 0x00007ff76c53e000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\java.exe
+0x00007ffa91c10000 - 0x00007ffa91e08000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffa91af0000 - 0x00007ffa91bad000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffa8f330000 - 0x00007ffa8f5fe000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffa8f680000 - 0x00007ffa8f780000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffa847d0000 - 0x00007ffa847e7000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\jli.dll
+0x00007ffa85970000 - 0x00007ffa8598a000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\VCRUNTIME140.dll
+0x00007ffa903b0000 - 0x00007ffa90550000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffa8f650000 - 0x00007ffa8f672000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffa90550000 - 0x00007ffa9057a000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffa8fb60000 - 0x00007ffa8fc6b000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffa8fa10000 - 0x00007ffa8faad000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffa64350000 - 0x00007ffa645ea000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffa90200000 - 0x00007ffa9029e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffa901d0000 - 0x00007ffa90200000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffa8aab0000 - 0x00007ffa8aabc000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\vcruntime140_1.dll
+0x00007ffa44ce0000 - 0x00007ffa44d6d000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\msvcp140.dll
+0x00007ffa0e170000 - 0x00007ffa0ed80000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\server\jvm.dll
+0x00007ffa90c00000 - 0x00007ffa90cae000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffa902a0000 - 0x00007ffa9033c000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffa90920000 - 0x00007ffa90a45000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffa90730000 - 0x00007ffa90738000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffa86b50000 - 0x00007ffa86b77000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffa7a890000 - 0x00007ffa7a899000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffa91610000 - 0x00007ffa9167b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffa87090000 - 0x00007ffa8709a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffa8d250000 - 0x00007ffa8d262000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffa848d0000 - 0x00007ffa848da000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\jimage.dll
+0x00007ffa79590000 - 0x00007ffa79774000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffa78cc0000 - 0x00007ffa78cec000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffa8f980000 - 0x00007ffa8fa02000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffa619e0000 - 0x00007ffa61a05000 	C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;C:\Users\Yongsoo Kwon\Desktop\Plitche\Youtube\ELK_beginning\elasticsearch-8.3.2\jdk\bin\server
+
+VM Arguments:
+jvm_args: -XX:+UseG1GC -Djava.io.tmpdir=C:\Users\Yongsoo Kwon\AppData\Local\Temp\elasticsearch -XX:+HeapDumpOnOutOfMemoryError -XX:+ExitOnOutOfMemoryError -XX:HeapDumpPath=data -XX:ErrorFile=logs/hs_err_pid%p.log -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m -Xms8167m -Xmx8167m -XX:+PrintFlagsFinal 
+java_command: <unknown>
+java_class_path (initial): C:\Program Files\Java\jdk1.8.0_202\lib
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+    ccstr ErrorFile                                = logs/hs_err_pid%p.log                     {product} {command line}
+     bool ExitOnOutOfMemoryError                   = true                                      {product} {command line}
+     uint G1ConcRefinementThreads                  = 13                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+     bool HeapDumpOnOutOfMemoryError               = true                                   {manageable} {command line}
+    ccstr HeapDumpPath                             = data                                   {manageable} {command line}
+   size_t InitialHeapSize                          = 8564768768                                {product} {command line, ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8564768768                                {product} {command line, ergonomic}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8564768768                                {product} {command line, ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 7602480                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122027880                              {pd product} {ergonomic}
+     bool PrintFlagsFinal                          = true                                      {product} {command line}
+    uintx ProfiledCodeHeapSize                     = 122027880                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 8564768768                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {command line}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+ #2: file=logs/gc.log all=off,gc*=info,age*=trace,safepoint=info utctime,pid,tags foldmultilines=false,filecount=32,filesize=65536K,async=false (reconfigured)
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_202
+CLASSPATH=C:\Program Files\Java\jdk1.8.0_202\lib
+PATH=C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files\Java\jdk1.8.0_202\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Common Files\Oracle\Java\javapath;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files (x86)\nvidia corporation\physx\common;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Ruby27-x64\bin;C:\Users\Yongsoo Kwon\AppData\Local\Microsoft\WindowsApps;C:\Users\Yongsoo Kwon\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Yongsoo Kwon\AppData\Local\atom\bin;C:\Users\Yongsoo Kwon\AppData\Local\Microsoft\WindowsApps;C:\Users\Yongsoo Kwon\AppData\Local\GitHubDesktop\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\Yongsoo Kwon\AppData\Roaming\npm;C:\Users\Yongsoo Kwon\AppData\Local\JetBrains\Toolbox\scripts
+USERNAME=Yongsoo Kwon
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.1806)
+OS uptime: 8 days 3:55 hours
+
+CPU: total 16 (initial active 16) (16 cores per cpu, 2 threads per core) family 23 model 8 stepping 2 microcode 0x0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt
+
+Memory: 4k page, system-wide physical 16335M (9155M free)
+TotalPageFile size 28516M (AvailPageFile size 5959M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 71M, peak: 8239M
+
+vm_info: OpenJDK 64-Bit Server VM (18.0.1.1+2-6) for windows-amd64 JRE (18.0.1.1+2-6), built on Apr 25 2022 21:50:56 by "mach5one" with MS VC++ 16.8 / 16.9 (VS2019)
+
+END.
