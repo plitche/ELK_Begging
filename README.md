@@ -29,30 +29,33 @@
           }
         }
       }
-    ```
-    2-1. OR 조건
-      ```json
-        {
-          "query": {
-            "match": {
-              "field": "text1 text2"
-            }
-          }
-        }
-      ```
-    2-2. AND 조건
-      ```json
+    ```  
+    
+   - OR 조건
+    ```json
       {
         "query": {
           "match": {
-            "field": {
-              "query": "text1 text2",
-              "operator": "and"
-            }
+            "field": "text1 text2"
           }
         }
       }
-      ```
+    ```  
+
+   - AND 조건
+    ```json
+    {
+      "query": {
+        "match": {
+          "field": {
+            "query": "text1 text2",
+            "operator": "and"
+          }
+        }
+      }
+    }
+    ```  
+      
   3. match_phrase: "text1 text2"라는 단어의 공백을 포함한 일치하는 도큐먼트를 검색하기 위한 방법. 검색어 순서까지 고려한다. slop은 사이에 다른 단어가 끼어드는 것을 허용하는 단어 개수
     ```json
     {
