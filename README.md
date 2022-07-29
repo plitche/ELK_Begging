@@ -1,13 +1,11 @@
 # ELK_Beginning
 
-### Command List
+## Command List
   1. curl https://localhost:9200 -u elastic:password -k
-  2. 
 
-
-### Query DSL
+## Query DSL
   
-##### Full Text Search
+#### Full Text Search
 - json 형식의 쿼리를 사용  
 - 기본 문법
   > GET index/_search
@@ -79,7 +77,7 @@
     }
     ```
   
-##### Bool 복합 쿼리
+#### Bool 복합 쿼리
   - 4개의 인자를 통하여, 그 인자 안에 다른 쿼리를 배열 형식으로 작성하여 동작한다.  
     1.must : 쿼리가 true인 도큐먼트들을 검색  
     2.must_not : 쿼리가 false인 도큐먼트들을 검색  
